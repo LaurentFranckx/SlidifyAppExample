@@ -1,0 +1,108 @@
+---
+title       : Interactive linear model comparison
+subtitle    : Illustration with the mtcars dataset
+author      : Laurent Franckx 
+job         : 
+framework   : io2012        # {io2012, html5slides, shower, dzslides, ...}
+highlighter : highlight.js  # {highlight.js, prettify, highlight}
+hitheme     : tomorrow      # 
+widgets     : [bootstrap, quiz, shiny, interactive]         # {mathjax, quiz, bootstrap}
+mode        : selfcontained # {standalone, draft}
+knit        : slidify::knit2slides
+
+---
+
+
+## Introduction
+
+- app addresses  determinants of  miles per callon (MPG) of passenger cars 
+- mtcars dataset contains 32 observations on 11 variables
+- app allows user to compare two different linear model specifications with different regressors
+- user can fine tune displayed information
+
+--- .class #id 
+
+
+## Output info of the app
+
+- default summary for the dataset
+
+- histogram for chosen variable
+
+- default summary tables for each model
+
+- model diagnostics  to identify influential observations.
+
+- plots to identify outliers and influential observations 
+
+- ANOVA table comparing the two models if embedded 
+
+--- .class #id 
+
+
+## Illustration
+
+- The complete app can be found at:
+
+https://lfranckx.shinyapps.io/course_shiny_project/
+
+- Illustration of the choice possibilities for the histogram:
+
+- Next slide: Illustration of regressor choice and model summary:
+
+
+
+```{r opts.label = 'shiny', echo=FALSE}
+slidifyUI(
+  sidebarPanel(
+        fluidRow(
+          h4("Show histogram for one selected variable:"),
+          selectInput("histo_var", 
+                      label = "Chosen variable:", 
+                      list("mpg" = "mpg", "cyl" = "cyl", "disp" = "disp", "hp"= "hp", "drat" = "drat", "wt" = "wt", 
+                           "qsec" = "qsec", "vs" = "vs","am"= "am", 
+                           "gear"= "gear", "carb"= "carb"),
+                      selected = "cyl"
+          ),
+          numericInput("bin", 
+                       label = "Maximal number of bins:", 
+                       value = 10)
+          )
+    ),
+  mainPanel(
+    h4('The histogram of the chosen variable is:'),
+    plotOutput("plothisto")
+  )
+)
+
+```
+
+ 
+--- .class #id 
+##Test
+
+- this is some test text
+
+--- .class #id 
+
+
+```{r opts.label = 'shiny', echo=TRUE}
+slidifyUI(
+  sidebarPanel(
+      h3("Parameters for the  model:"),
+      checkboxGroupInput("Var_choice_1", 
+                       label = h4("Regressors to include in first model:"), 
+                       list("cyl" = "cyl", "disp" = "disp", "hp"= "hp", "drat" = "drat", "wt" = "wt", 
+                            "qsec" = "qsec", "vs" = "vs","am"= "am", 
+                            "gear"= "gear", "carb"= "carb"),
+                       selected = "cyl")
+
+    ),
+  mainPanel(
+    h4('The first model results are:'),
+     verbatimTextOutput("modres1")
+  )
+)
+
+```
+

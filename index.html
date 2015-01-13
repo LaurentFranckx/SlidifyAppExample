@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Interactive linear model comparison</title>
+  <meta charset="utf-8">
+  <meta name="description" content="Interactive linear model comparison">
+  <meta name="author" content="Laurent Franckx">
+  <meta name="generator" content="slidify" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/default.css" media="all" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/phone.css" 
+    media="only screen and (max-device-width: 480px)" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/slidify.css" >
+  <link rel="stylesheet" href="libraries/highlighters/highlight.js/css/tomorrow.css" />
+  <base target="_blank"> <!-- This amazingness opens all links in a new tab. -->  <link rel=stylesheet href="libraries/widgets/bootstrap/css/bootstrap.css"></link>
+<link rel=stylesheet href="libraries/widgets/quiz/css/demo.css"></link>
+<link rel=stylesheet href="libraries/widgets/interactive/css/aceeditor.css"></link>
+<link rel=stylesheet href="./assets/css/ribbons.css"></link>
+
+  
+  <!-- Grab CDN jQuery, fall back to local if offline -->
+  <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.min.js"></script>
+  <script>window.jQuery || document.write('<script src="libraries/widgets/quiz/js/jquery.js"><\/script>')</script> 
+  <script data-main="libraries/frameworks/io2012/js/slides" 
+    src="libraries/frameworks/io2012/js/require-1.0.8.min.js">
+  </script>
+  
+  
+
+</head>
+<body style="opacity: 0">
+  <slides class="layout-widescreen">
+    
+    <!-- LOGO SLIDE -->
+        <slide class="title-slide segue nobackground">
+  <hgroup class="auto-fadein">
+    <h1>Interactive linear model comparison</h1>
+    <h2>Illustration with the mtcars dataset</h2>
+    <p>Laurent Franckx<br/></p>
+  </hgroup>
+  <article></article>  
+</slide>
+    
+
+    <!-- SLIDES -->
+    <slide class="" id="slide-1" style="background:;">
+  <hgroup>
+    <h2>Introduction</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>app addresses  determinants of  miles per callon (MPG) of passenger cars </li>
+<li>mtcars dataset contains 32 observations on 11 variables</li>
+<li>app allows user to compare two different linear model specifications with different regressors</li>
+<li>user can fine tune displayed information</li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="class" id="id" style="background:;">
+  <hgroup>
+    <h2>Output info of the app</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>default summary for the dataset</p></li>
+<li><p>histogram for chosen variable</p></li>
+<li><p>default summary tables for each model</p></li>
+<li><p>model diagnostics  to identify influential observations.</p></li>
+<li><p>plots to identify outliers and influential observations </p></li>
+<li><p>ANOVA table comparing the two models if embedded </p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="class" id="id" style="background:;">
+  <hgroup>
+    <h2>Illustration</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>The complete app can be found at:</li>
+</ul>
+
+<p><a href="https://lfranckx.shinyapps.io/course_shiny_project/">https://lfranckx.shinyapps.io/course_shiny_project/</a></p>
+
+<ul>
+<li><p>Illustration of the choice possibilities for the histogram:</p></li>
+<li><p>Next slide: Illustration of regressor choice and model summary:</p></li>
+</ul>
+
+<div class="row-fluid">
+  <div class="span4">
+    <form class="well">
+      <div class="row-fluid">
+        <h4>Show histogram for one selected variable:</h4>
+        <label class="control-label" for="histo_var">Chosen variable:</label>
+        <select id="histo_var"><option value="mpg">mpg</option>
+<option value="cyl" selected>cyl</option>
+<option value="disp">disp</option>
+<option value="hp">hp</option>
+<option value="drat">drat</option>
+<option value="wt">wt</option>
+<option value="qsec">qsec</option>
+<option value="vs">vs</option>
+<option value="am">am</option>
+<option value="gear">gear</option>
+<option value="carb">carb</option></select>
+        <script type="application/json" data-for="histo_var" data-nonempty="">{}</script>
+        <label for="bin">Maximal number of bins:</label>
+        <input id="bin" type="number" value="10"/>
+      </div>
+    </form>
+  </div>
+  <div class="span8">
+    <h4>The histogram of the chosen variable is:</h4>
+    <div id="plothisto" class="shiny-plot-output" style="width: 100% ; height: 400px"></div>
+  </div>
+</div>
+
+<p>--- .class #id 
+##Test</p>
+
+<ul>
+<li>this is some test text</li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="class" id="id" style="background:;">
+  <article data-timings="">
+    <div class="row-fluid">
+  <div class="span4">
+    <form class="well">
+      <h3>Parameters for the  model:</h3>
+      <div id="Var_choice_1" class="control-group shiny-input-checkboxgroup">
+        <label class="control-label" for="Var_choice_1">
+          <h4>Regressors to include in first model:</h4>
+        </label>
+        <label class="checkbox ">
+          <input type="checkbox" name="Var_choice_1" id="Var_choice_11" value="cyl" checked="checked"/>
+          <span>cyl</span>
+        </label>
+        <label class="checkbox ">
+          <input type="checkbox" name="Var_choice_1" id="Var_choice_12" value="disp"/>
+          <span>disp</span>
+        </label>
+        <label class="checkbox ">
+          <input type="checkbox" name="Var_choice_1" id="Var_choice_13" value="hp"/>
+          <span>hp</span>
+        </label>
+        <label class="checkbox ">
+          <input type="checkbox" name="Var_choice_1" id="Var_choice_14" value="drat"/>
+          <span>drat</span>
+        </label>
+        <label class="checkbox ">
+          <input type="checkbox" name="Var_choice_1" id="Var_choice_15" value="wt"/>
+          <span>wt</span>
+        </label>
+        <label class="checkbox ">
+          <input type="checkbox" name="Var_choice_1" id="Var_choice_16" value="qsec"/>
+          <span>qsec</span>
+        </label>
+        <label class="checkbox ">
+          <input type="checkbox" name="Var_choice_1" id="Var_choice_17" value="vs"/>
+          <span>vs</span>
+        </label>
+        <label class="checkbox ">
+          <input type="checkbox" name="Var_choice_1" id="Var_choice_18" value="am"/>
+          <span>am</span>
+        </label>
+        <label class="checkbox ">
+          <input type="checkbox" name="Var_choice_1" id="Var_choice_19" value="gear"/>
+          <span>gear</span>
+        </label>
+        <label class="checkbox ">
+          <input type="checkbox" name="Var_choice_1" id="Var_choice_110" value="carb"/>
+          <span>carb</span>
+        </label>
+      </div>
+    </form>
+  </div>
+  <div class="span8">
+    <h4>The first model results are:</h4>
+    <pre id="modres1" class="shiny-text-output"></pre>
+  </div>
+</div>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+    <slide class="backdrop"></slide>
+  </slides>
+  <div class="pagination pagination-small" id='io2012-ptoc' style="display:none;">
+    <ul>
+      <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=1 title='Introduction'>
+         1
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=2 title='Output info of the app'>
+         2
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=3 title='Illustration'>
+         3
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=4 title=''>
+         4
+      </a>
+    </li>
+  </ul>
+  </div>  <!--[if IE]>
+    <script 
+      src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js">  
+    </script>
+    <script>CFInstall.check({mode: 'overlay'});</script>
+  <![endif]-->
+</body>
+  <!-- Load Javascripts for Widgets -->
+  <script src="libraries/widgets/bootstrap/js/bootstrap.min.js"></script>
+<script src="libraries/widgets/bootstrap/js/bootbox.min.js"></script>
+<script src="libraries/widgets/quiz/js/jquery.quiz.js"></script>
+<script src="libraries/widgets/quiz/js/mustache.min.js"></script>
+<script src="libraries/widgets/quiz/js/quiz-app.js"></script>
+<script src="libraries/widgets/interactive/js/ace/js/ace.js"></script>
+<script src="libraries/widgets/interactive/js/opencpu-0.5.js"></script>
+<script src="libraries/widgets/interactive/js/interactive.js"></script>
+
+  <script>  
+  $(function (){ 
+    $("#example").popover(); 
+    $("[rel='tooltip']").tooltip(); 
+  });  
+  </script>  
+  
+  <script src="shared/shiny.js" type="text/javascript"></script>
+  <script src="shared/slider/js/jquery.slider.min.js"></script>
+  <script src="shared/bootstrap/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="shared/slider/css/jquery.slider.min.css"></link>
+  
+  <!-- LOAD HIGHLIGHTER JS FILES -->
+  <script src="libraries/highlighters/highlight.js/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <!-- DONE LOADING HIGHLIGHTER JS FILES -->
+   
+  </html>
